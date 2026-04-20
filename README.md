@@ -90,8 +90,15 @@ raxml-ng --all \
 
 Run once per region × bootstrap threshold × genetic distance threshold combination. Bootstrap thresholds evaluated: 70, 90, 99. Genetic distance thresholds evaluated: 0.5%–4.5% in 0.5% steps.
 
-- `input.fasta` — DECIPHER-aligned FASTA for the region (e.g., `DECIPHER_aligned_Env_CDS_sequences.fasta`)
-- `input.nwk`  — RAxML-NG bootstrap support tree for the region (e.g., `Env_CDS_mytree_bs.raxml.support`)
+| Argument | Value | Description |
+|----------|-------|-------------|
+| 1 | `DECIPHER_aligned_Env_CDS_sequences.fasta` | DECIPHER-aligned FASTA file |
+| 2 | `Env_CDS_mytree_bs.raxml.support` | RAxML-NG bootstrap support tree |
+| 3 | `90` | Initial bootstrap support threshold (%) for cluster detection |
+| 4 | `90` | Final bootstrap support threshold (%) — set equal to argument 3 |
+| 5 | `0.03` | Maximum pairwise genetic distance within a cluster (3%) |
+| 6 | `2` | Minimum cluster size (at least 2 sequences) |
+| 7 | `gap` | Distance method: gap positions are ignored in distance calculation |
 
 ```bash
 java -jar ClusterPicker_1.2.5.jar \
@@ -103,11 +110,21 @@ java -jar ClusterPicker_1.2.5.jar \
     gap
 ```
 
-Repeat for each region, adjusting the FASTA, tree file, bootstrap threshold, and genetic distance accordingly.
+Repeat for each region, adjusting the FASTA file, tree file, bootstrap threshold (90 → 70 or 99), and genetic distance (0.03 → 0.005–0.045) accordingly.
 
 ### HIV-TRACE
 
 Run once per region × genetic distance threshold combination. Genetic distance thresholds evaluated: 0.5%–4.5% in 0.5% steps. Use the appropriate HXB2 reference per region (`HXB2_pol` for gag-pol, protease, RT, integrase, and full-length; `HXB2_env` for env; `HXB2_vif` for vif; `HXB2_nef` for nef).
+
+| Flag | Value | Description |
+|------|-------|-------------|
+| `-i` | `DECIPHER_aligned_Env_CDS_sequences.fasta` | DECIPHER-aligned FASTA file |
+| `-a` | `0.015` | Ambiguity threshold: sequences with >1.5% ambiguous bases are excluded |
+| `-r` | `HXB2_env` | HXB2 reference name for the genomic region |
+| `-t` | `0.03` | Genetic distance threshold for cluster membership (3%) |
+| `-m` | `200` | Minimum nucleotide overlap required between two sequences |
+| `-g` | `0.9` | Minimum overlap fraction (90% of the shorter sequence must overlap) |
+| `-o` | `Env_CDS_hivtrace_GD030.json` | Output JSON file |
 
 ```bash
 hivtrace \
