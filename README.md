@@ -1,6 +1,6 @@
 # HIVphyloSeq
 
-All analyses used publicly available sequences downloaded from the [LANL HIV Sequence Database](https://www.hiv.lanl.gov/). See [`sequence_selection.md`](sequence_selection.md) for the full filtering workflow.
+All analyses used publicly available sequences downloaded on Feb. 24, 2025, from the [LANL HIV Sequence Database](https://www.hiv.lanl.gov/). See [`sequence_selection.md`](sequence_selection.md) for the full filtering workflow.
 
 ---
 
